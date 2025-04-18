@@ -117,3 +117,16 @@ export const getParticipantById = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error al obtener participante' });
   }
 };
+
+export const updatePaymentStatus = async (req: Request, res: Response) => {
+  try {
+    const id_participante = parseInt(req.params.id, 10);
+    const status = req.body.estadoPago;
+    const result = await ParticipantModel.updatePaymentStatus(id_participante, status);
+    
+    res.json({ message: 'Estado de pago actualizado exitosamente', result });
+  } catch (error) {
+    console.error('Error al actualizar estado de pago:', error);
+    res.status(500).json({ message: 'Error al actualizar estado de pago' });
+  }
+};
