@@ -1,4 +1,4 @@
-// src/helpers/dbUtils.ts
+// src/dbUtils.ts
 
 import { db } from "../config/db";
 
@@ -16,7 +16,7 @@ export async function callProcedure<T = any>(
 
   // MySQL devuelve varios result sets, tomamos el primero útil
   if (Array.isArray(resultSets)) {
-    return resultSets as T[];
+    return resultSets[0] as T[];
   }
 
   return [];
