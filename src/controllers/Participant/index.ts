@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import * as ParticipantModel from '../../models/Participant/index';
-
 export const createParticipant = async (req: Request, res: Response) => {
   try {
     const {
@@ -16,7 +15,10 @@ export const createParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago  
     } = req.body;
 
     const result = await ParticipantModel.createParticipant(
@@ -32,7 +34,10 @@ export const createParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago
     );
     
     res.status(201).json({ 
@@ -61,7 +66,10 @@ export const updateParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago
     } = req.body;
 
     const result = await ParticipantModel.updateParticipant(
@@ -78,7 +86,10 @@ export const updateParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta, 
+      estadoPago
     );
     
     res.json({ message: 'Participante actualizado exitosamente', result });
