@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import ParticipantRoutes from './routes/Participant';
 import AdministratorRoutes from './routes/Administrator';
+import cors from 'cors';
 
 // Load environment variables
 dotenv.config();
@@ -12,6 +13,7 @@ const port = process.env.PORT || 8080;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors('*'));
 
 const apiVersion = '/api/v1';
 

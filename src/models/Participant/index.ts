@@ -80,3 +80,7 @@ export const updateParticipant = async (
 export const deleteParticipant = async (idParticipante: number) => {
   return await callProcedure("deleteParticipant", [idParticipante]);
 };
+
+export const updatePaymentStatus = async (id_participante: number, status: string) => {
+  return await callProcedure("updatePaymentStatus", [id_participante, status]);
+};
