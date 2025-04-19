@@ -1,75 +1,82 @@
 import { callProcedure } from "../../utils/callProcedure";
 
 export const getParticipants = async () => {
-  return await callProcedure("getParticipants");
+  return await callProcedure("getParticipants", []);
 };
 
-export const getParticipantById = async (id_participante: number) => {
-  const result = await callProcedure("getParticipantById", [id_participante]);
+export const getParticipantById = async (idParticipante: number) => {
+  const result = await callProcedure("getParticipantById", [idParticipante]);
   return result[0] || null;
 };
 
 export const createParticipant = async (
-  carnetIdentificacion: string | null,
+  tipoParticipante: 'E' | 'C' | 'I',
   nombre: string,
-  apellido: string,
+  carnetCarrera: number | null,
+  carnetAnio: number | null,
+  carnetSerie: number | null,
   correoElectronico: string,
-  numeroTelefono: string,
-  empresaInstitucion: string,
-  tipoParticipante: string,
+  telefono: number,
+  talla: 'XL' | 'L' | 'M' | 'S',
+  fechaNacimiento: string, // formato 'YYYY-MM-DD'
+  institucion: string | null,
+  Rol: string,
   codigoQR: string,
-  idPago: string | null,
-  Evento_PK: number
+  certificadoEnviado: boolean
 ) => {
-  // For stored procedures with OUT parameters, the last parameter is for the output
   const result = await callProcedure("createParticipant", [
-    carnetIdentificacion,
-    nombre,
-    apellido,
-    correoElectronico,
-    numeroTelefono,
-    empresaInstitucion,
     tipoParticipante,
+    nombre,
+    carnetCarrera,
+    carnetAnio,
+    carnetSerie,
+    correoElectronico,
+    telefono,
+    talla,
+    fechaNacimiento,
+    institucion,
+    Rol,
     codigoQR,
-    idPago,
-    Evento_PK,
+    certificadoEnviado
   ]);
 
   return result;
 };
 
 export const updateParticipant = async (
-  id_participante: number,
-  carnetIdentificacion: string | null,
+  idParticipante: number,
+  tipoParticipante: 'E' | 'C' | 'I',
   nombre: string,
-  apellido: string,
+  carnetCarrera: number | null,
+  carnetAnio: number | null,
+  carnetSerie: number | null,
   correoElectronico: string,
-  numeroTelefono: string,
-  empresaInstitucion: string,
-  tipoParticipante: string,
+  telefono: number,
+  talla: 'XL' | 'L' | 'M' | 'S',
+  fechaNacimiento: string,
+  institucion: string | null,
+  Rol: string,
   codigoQR: string,
-  idPago: string | null,
-  certificadoEnviado: boolean,
-  Evento_PK: number,
-  Asistencia: boolean
+  certificadoEnviado: boolean
 ) => {
   return await callProcedure("updateParticipant", [
-    id_participante,
-    carnetIdentificacion,
-    nombre,
-    apellido,
-    correoElectronico,
-    numeroTelefono,
-    empresaInstitucion,
+    idParticipante,
     tipoParticipante,
+    nombre,
+    carnetCarrera,
+    carnetAnio,
+    carnetSerie,
+    correoElectronico,
+    telefono,
+    talla,
+    fechaNacimiento,
+    institucion,
+    Rol,
     codigoQR,
-    idPago,
-    certificadoEnviado,
-    Evento_PK,
-    Asistencia,
+    certificadoEnviado ? 1 : 0,
   ]);
 };
 
-export const deleteParticipant = async (id_participante: number) => {
-  return await callProcedure("deleteParticipant", [id_participante]);
+export const deleteParticipant = async (idParticipante: number) => {
+  return await callProcedure("deleteParticipant", [idParticipante]);
 };

@@ -3,29 +3,35 @@ import * as ParticipantModel from '../../models/Participant/index';
 export const createParticipant = async (req: Request, res: Response) => {
   try {
     const {
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
-      Evento_PK
+      certificadoEnviado
     } = req.body;
 
     const result = await ParticipantModel.createParticipant(
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
-      Evento_PK
+      certificadoEnviado
     );
     
     res.status(201).json({ 
@@ -40,36 +46,38 @@ export const createParticipant = async (req: Request, res: Response) => {
 
 export const updateParticipant = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
+    const idParticipante = parseInt(req.params.id, 10);
     const {
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
-      certificadoEnviado,
-      Evento_PK,
-      Asistencia
+      certificadoEnviado
     } = req.body;
 
     const result = await ParticipantModel.updateParticipant(
-      id_participante,
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
+      idParticipante,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
-      certificadoEnviado,
-      Evento_PK,
-      Asistencia
+      certificadoEnviado
     );
     
     res.json({ message: 'Participante actualizado exitosamente', result });
@@ -81,8 +89,8 @@ export const updateParticipant = async (req: Request, res: Response) => {
 
 export const deleteParticipant = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
-    const result = await ParticipantModel.deleteParticipant(id_participante);
+    const idParticipante = parseInt(req.params.id, 10);
+    const result = await ParticipantModel.deleteParticipant(idParticipante);
 
     
     res.json({ message: 'Participante eliminado exitosamente' });
@@ -104,8 +112,8 @@ export const getParticipants = async (_req: Request, res: Response) => {
 
 export const getParticipantById = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
-    const participant = await ParticipantModel.getParticipantById(id_participante);
+    const idParticipante = parseInt(req.params.id, 10);
+    const participant = await ParticipantModel.getParticipantById(idParticipante);
     
     if (!participant) {
       return res.status(404).json({ message: 'Participante no encontrado' });
