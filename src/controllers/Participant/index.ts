@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as ParticipantModel from '../../models/Participant/index';
+
 export const createParticipant = async (req: Request, res: Response) => {
   try {
     const {
@@ -126,3 +127,15 @@ export const getParticipantById = async (req: Request, res: Response) => {
   }
 };
 
+export const updatePaymentStatus = async (req: Request, res: Response) => {
+  try {
+    const idParticipante = parseInt(req.params.id, 10);
+    const status = req.body.estadoPago;
+    const result = await ParticipantModel.updatePaymentStatus(idParticipante, status);
+    
+    res.json({ message: 'Estado de pago actualizado exitosamente', result });
+  } catch (error) {
+    console.error('Error al actualizar estado de pago:', error);
+    res.status(500).json({ message: 'Error al actualizar estado de pago' });
+  }
+};
