@@ -1,33 +1,32 @@
 import { callProcedure } from "../../utils/callProcedure";
 
 export const getParticipants = async () => {
-  return await callProcedure("getParticipants");
+  return await callProcedure("getParticipantPayment", []);
 };
 
-export const getParticipantById = async (id_participante: number) => {
-  const result = await callProcedure("getParticipantById", [id_participante]);
+export const getParticipantById = async (idParticipante: number) => {
+  const result = await callProcedure("getParticipantPaymentById", [idParticipante]);
   return result[0] || null;
 };
 
 export const createParticipant = async (
-  tipoParticipante: string,
+  tipoParticipante: 'E' | 'C' | 'I',
   nombre: string,
-  carnetCarrera: string | null,
-  carnetAnio: string | null,
-  carnetSerie: string | null,
+  carnetCarrera: number | null,
+  carnetAnio: number | null,
+  carnetSerie: number | null,
   correoElectronico: string,
-  numeroTelefono: string,
-  tallaCamisa: string,
-  fechaNacimiento: string,
-  empresaInstitucion: string,
-  rol: string,
+  telefono: number,
+  talla: 'XL' | 'L' | 'M' | 'S',
+  fechaNacimiento: string, // formato 'YYYY-MM-DD'
+  institucion: string | null,
+  Rol: string,
   codigoQR: string,
-  certificadoEnviado: number|null,
-  tipoPago: string | null,
-  boleta:string | null,
-  estadoPago: string | null
+  certificadoEnviado: boolean,
+  tipoPago: 'E' | 'D',
+  boleta: string,
+  estadoPago: 'C' | 'P' | 'R' | 'V'
 ) => {
-  // For stored procedures with OUT parameters, the last parameter is for the output
   const result = await callProcedure("createParticipantPayment", [
     tipoParticipante,
     nombre,
@@ -35,11 +34,11 @@ export const createParticipant = async (
     carnetAnio,
     carnetSerie,
     correoElectronico,
-    numeroTelefono,
-    tallaCamisa,
+    telefono,
+    talla,
     fechaNacimiento,
-    empresaInstitucion,
-    rol,
+    institucion,
+    Rol,
     codigoQR,
     certificadoEnviado,
     tipoPago,
@@ -51,42 +50,53 @@ export const createParticipant = async (
 };
 
 export const updateParticipant = async (
-  id_participante: number,
-  carnetIdentificacion: string | null,
+  idParticipante: number,
+  tipoParticipante: 'E' | 'C' | 'I',
   nombre: string,
-  apellido: string,
+  carnetCarrera: number | null,
+  carnetAnio: number | null,
+  carnetSerie: number | null,
   correoElectronico: string,
-  numeroTelefono: string,
-  empresaInstitucion: string,
-  tipoParticipante: string,
+  telefono: number,
+  talla: 'XL' | 'L' | 'M' | 'S',
+  fechaNacimiento: string,
+  institucion: string | null,
+  Rol: string,
   codigoQR: string,
-  idPago: string | null,
   certificadoEnviado: boolean,
-  Evento_PK: number,
-  Asistencia: boolean
+  tipoPago: 'E' | 'D',
+  boleta: string,
+  estadoPago: 'C' | 'P' | 'R' | 'V'
 ) => {
-  return await callProcedure("updateParticipant", [
-    id_participante,
-    carnetIdentificacion,
-    nombre,
-    apellido,
-    correoElectronico,
-    numeroTelefono,
-    empresaInstitucion,
+  return await callProcedure("updateParticipantPayment", [
+    idParticipante,
     tipoParticipante,
+    nombre,
+    carnetCarrera,
+    carnetAnio,
+    carnetSerie,
+    correoElectronico,
+    telefono,
+    talla,
+    fechaNacimiento,
+    institucion,
+    Rol,
     codigoQR,
-    idPago,
-    certificadoEnviado,
-    Evento_PK,
-    Asistencia,
+    certificadoEnviado ? 1 : 0,
+    tipoPago,
+    boleta,
+    estadoPago
   ]);
 };
 
-export const deleteParticipant = async (id_participante: number) => {
-  return await callProcedure("deleteParticipant", [id_participante]);
+export const deleteParticipant = async (idParticipante: number) => {
+  return await callProcedure("deleteParticipant", [idParticipante]);
 };
 
+export const updatePaymentStatus = async (idParticipante: number, status: string) => {
+  return await callProcedure("updatePaymentStatus", [idParticipante, status]);
+};
 
-export const updatePaymentStatus = async (id_participante: number, status: string) => {
-  return await callProcedure("updatePaymentStatus", [id_participante, status]);
+export const updateKitStatus = async (idParticipante: number, status: number) => {
+  return await callProcedure("updateKitStatus", [idParticipante, status]);
 };
