@@ -12,7 +12,12 @@ const port = process.env.PORT || 8080;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+<<<<<<< HEAD
 app.use(cors({ origin: '*' }));
+=======
+app.use(cors({ origin: '*' }));//app.use(cors());
+//app.use(cors('*'));
+>>>>>>> 5dc9c75fa82e28dee55d2137c5e71a4dfd7de397
 
 const apiVersion = '/api/v1';
 

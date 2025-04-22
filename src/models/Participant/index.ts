@@ -95,4 +95,11 @@ export const deleteParticipant = async (idParticipante: number) => {
 
 export const updatePaymentStatus = async (idParticipante: number, status: string) => {
   return await callProcedure("updatePaymentStatus", [idParticipante, status]);
+<<<<<<< HEAD
+=======
+};
+
+export const updateKitStatus = async (idParticipante: number, status: number) => {
+  return await callProcedure("updateKitStatus", [idParticipante, status]);
+>>>>>>> 5dc9c75fa82e28dee55d2137c5e71a4dfd7de397
 };
