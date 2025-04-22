@@ -3,29 +3,41 @@ import * as ParticipantModel from '../../models/Participant/index';
 export const createParticipant = async (req: Request, res: Response) => {
   try {
     const {
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
-      Evento_PK
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago  
     } = req.body;
 
     const result = await ParticipantModel.createParticipant(
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
-      Evento_PK
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago
     );
     
     res.status(201).json({ 
@@ -40,36 +52,44 @@ export const createParticipant = async (req: Request, res: Response) => {
 
 export const updateParticipant = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
+    const idParticipante = parseInt(req.params.id, 10);
     const {
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
       certificadoEnviado,
-      Evento_PK,
-      Asistencia
+      tipoPago,
+      boleta,
+      estadoPago
     } = req.body;
 
     const result = await ParticipantModel.updateParticipant(
-      id_participante,
-      carnetIdentificacion,
-      nombre,
-      apellido,
-      correoElectronico,
-      numeroTelefono,
-      empresaInstitucion,
+      idParticipante,
       tipoParticipante,
+      nombre,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
+      correoElectronico,
+      telefono,
+      talla,
+      fechaNacimiento,
+      institucion,
+      Rol,
       codigoQR,
-      idPago,
       certificadoEnviado,
-      Evento_PK,
-      Asistencia
+      tipoPago,
+      boleta, 
+      estadoPago
     );
     
     res.json({ message: 'Participante actualizado exitosamente', result });
@@ -81,8 +101,8 @@ export const updateParticipant = async (req: Request, res: Response) => {
 
 export const deleteParticipant = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
-    const result = await ParticipantModel.deleteParticipant(id_participante);
+    const idParticipante = parseInt(req.params.id, 10);
+    const result = await ParticipantModel.deleteParticipant(idParticipante);
 
     
     res.json({ message: 'Participante eliminado exitosamente' });
@@ -104,8 +124,8 @@ export const getParticipants = async (_req: Request, res: Response) => {
 
 export const getParticipantById = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
-    const participant = await ParticipantModel.getParticipantById(id_participante);
+    const idParticipante = parseInt(req.params.id, 10);
+    const participant = await ParticipantModel.getParticipantById(idParticipante);
     
     if (!participant) {
       return res.status(404).json({ message: 'Participante no encontrado' });
@@ -120,13 +140,26 @@ export const getParticipantById = async (req: Request, res: Response) => {
 
 export const updatePaymentStatus = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
+    const idParticipante = parseInt(req.params.id, 10);
     const status = req.body.estadoPago;
-    const result = await ParticipantModel.updatePaymentStatus(id_participante, status);
+    const result = await ParticipantModel.updatePaymentStatus(idParticipante, status);
     
     res.json({ message: 'Estado de pago actualizado exitosamente', result });
   } catch (error) {
     console.error('Error al actualizar estado de pago:', error);
     res.status(500).json({ message: 'Error al actualizar estado de pago' });
+  }
+};
+
+export const updateKitStatus = async (req: Request, res: Response) => {
+  try {
+    const idParticipante = parseInt(req.params.id, 10);
+    const status = req.body.kit;
+    const result = await ParticipantModel.updateKitStatus(idParticipante, status);
+    
+    res.json({ message: 'Estado del kit actualizado exitosamente', result });
+  } catch (error) {
+    console.error('Error al actualizar estado del kit:', error);
+    res.status(500).json({ message: 'Error al actualizar estado del kit' });
   }
 };
