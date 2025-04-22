@@ -1,11 +1,11 @@
 import { callProcedure } from "../../utils/callProcedure";
 
 export const getParticipants = async () => {
-  return await callProcedure("getParticipants", []);
+  return await callProcedure("getParticipantPayment", []);
 };
 
 export const getParticipantById = async (idParticipante: number) => {
-  const result = await callProcedure("getParticipantById", [idParticipante]);
+  const result = await callProcedure("getParticipantPaymentById", [idParticipante]);
   return result[0] || null;
 };
 
@@ -22,9 +22,12 @@ export const createParticipant = async (
   institucion: string | null,
   Rol: string,
   codigoQR: string,
-  certificadoEnviado: boolean
+  certificadoEnviado: boolean,
+  tipoPago: 'E' | 'D',
+  boleta: string,
+  estadoPago: 'C' | 'P' | 'R' | 'V'
 ) => {
-  const result = await callProcedure("createParticipant", [
+  const result = await callProcedure("createParticipantPayment", [
     tipoParticipante,
     nombre,
     carnetCarrera,
@@ -37,7 +40,10 @@ export const createParticipant = async (
     institucion,
     Rol,
     codigoQR,
-    certificadoEnviado
+    certificadoEnviado,
+    tipoPago,
+    boleta,
+    estadoPago
   ]);
 
   return result;
@@ -57,9 +63,12 @@ export const updateParticipant = async (
   institucion: string | null,
   Rol: string,
   codigoQR: string,
-  certificadoEnviado: boolean
+  certificadoEnviado: boolean,
+  tipoPago: 'E' | 'D',
+  boleta: string,
+  estadoPago: 'C' | 'P' | 'R' | 'V'
 ) => {
-  return await callProcedure("updateParticipant", [
+  return await callProcedure("updateParticipantPayment", [
     idParticipante,
     tipoParticipante,
     nombre,
@@ -74,6 +83,9 @@ export const updateParticipant = async (
     Rol,
     codigoQR,
     certificadoEnviado ? 1 : 0,
+    tipoPago,
+    boleta,
+    estadoPago
   ]);
 };
 
@@ -81,6 +93,6 @@ export const deleteParticipant = async (idParticipante: number) => {
   return await callProcedure("deleteParticipant", [idParticipante]);
 };
 
-export const updatePaymentStatus = async (id_participante: number, status: string) => {
-  return await callProcedure("updatePaymentStatus", [id_participante, status]);
+export const updatePaymentStatus = async (idParticipante: number, status: string) => {
+  return await callProcedure("updatePaymentStatus", [idParticipante, status]);
 };

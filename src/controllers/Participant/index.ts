@@ -15,7 +15,10 @@ export const createParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago  
     } = req.body;
 
     const result = await ParticipantModel.createParticipant(
@@ -31,7 +34,10 @@ export const createParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago
     );
     
     res.status(201).json({ 
@@ -60,7 +66,10 @@ export const updateParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago
     } = req.body;
 
     const result = await ParticipantModel.updateParticipant(
@@ -77,7 +86,10 @@ export const updateParticipant = async (req: Request, res: Response) => {
       institucion,
       Rol,
       codigoQR,
-      certificadoEnviado
+      certificadoEnviado,
+      tipoPago,
+      boleta, 
+      estadoPago
     );
     
     res.json({ message: 'Participante actualizado exitosamente', result });
@@ -124,20 +136,17 @@ export const getParticipantById = async (req: Request, res: Response) => {
     console.error('Error al obtener participante:', error);
     res.status(500).json({ message: 'Error al obtener participante' });
   }
-<<<<<<< HEAD
-=======
 };
 
 export const updatePaymentStatus = async (req: Request, res: Response) => {
   try {
-    const id_participante = parseInt(req.params.id, 10);
+    const idParticipante = parseInt(req.params.id, 10);
     const status = req.body.estadoPago;
-    const result = await ParticipantModel.updatePaymentStatus(id_participante, status);
+    const result = await ParticipantModel.updatePaymentStatus(idParticipante, status);
     
     res.json({ message: 'Estado de pago actualizado exitosamente', result });
   } catch (error) {
     console.error('Error al actualizar estado de pago:', error);
     res.status(500).json({ message: 'Error al actualizar estado de pago' });
   }
->>>>>>> main
 };
