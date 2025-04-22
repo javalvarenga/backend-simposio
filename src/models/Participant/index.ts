@@ -10,29 +10,41 @@ export const getParticipantById = async (id_participante: number) => {
 };
 
 export const createParticipant = async (
-  carnetIdentificacion: string | null,
+  tipoParticipante: string,
   nombre: string,
-  apellido: string,
+  carnetCarrera: string | null,
+  carnetAnio: string | null,
+  carnetSerie: string | null,
   correoElectronico: string,
   numeroTelefono: string,
+  tallaCamisa: string,
+  fechaNacimiento: string,
   empresaInstitucion: string,
-  tipoParticipante: string,
+  rol: string,
   codigoQR: string,
-  idPago: string | null,
-  Evento_PK: number
+  certificadoEnviado: number|null,
+  tipoPago: string | null,
+  boleta:string | null,
+  estadoPago: string | null
 ) => {
   // For stored procedures with OUT parameters, the last parameter is for the output
-  const result = await callProcedure("createParticipant", [
-    carnetIdentificacion,
+  const result = await callProcedure("createParticipantPayment", [
+    tipoParticipante,
     nombre,
-    apellido,
+    carnetCarrera,
+    carnetAnio,
+    carnetSerie,
     correoElectronico,
     numeroTelefono,
+    tallaCamisa,
+    fechaNacimiento,
     empresaInstitucion,
-    tipoParticipante,
+    rol,
     codigoQR,
-    idPago,
-    Evento_PK,
+    certificadoEnviado,
+    tipoPago,
+    boleta,
+    estadoPago
   ]);
 
   return result;

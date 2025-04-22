@@ -3,29 +3,41 @@ import * as ParticipantModel from '../../models/Participant/index';
 export const createParticipant = async (req: Request, res: Response) => {
   try {
     const {
-      carnetIdentificacion,
+      tipoParticipante,
       nombre,
-      apellido,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
       correoElectronico,
       numeroTelefono,
+      tallaCamisa,
+      fechaNacimiento,
       empresaInstitucion,
-      tipoParticipante,
+      rol,
       codigoQR,
-      idPago,
-      Evento_PK
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago
     } = req.body;
 
     const result = await ParticipantModel.createParticipant(
-      carnetIdentificacion,
+      tipoParticipante,
       nombre,
-      apellido,
+      carnetCarrera,
+      carnetAnio,
+      carnetSerie,
       correoElectronico,
       numeroTelefono,
+      tallaCamisa,
+      fechaNacimiento,
       empresaInstitucion,
-      tipoParticipante,
+      rol,
       codigoQR,
-      idPago,
-      Evento_PK
+      certificadoEnviado,
+      tipoPago,
+      boleta,
+      estadoPago
     );
     
     res.status(201).json({ 
