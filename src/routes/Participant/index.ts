@@ -11,5 +11,6 @@ router.post("/", ParticipantController.createParticipant);
 router.put("/:id", ParticipantController.updateParticipant);
 router.delete("/:id", ParticipantController.deleteParticipant);
 router.patch("/updatePaymentStatus/:id", ParticipantController.updatePaymentStatus);
+router.patch("/updateKitStatus/:id", ParticipantController.updateKitStatus);
 
 export default router;

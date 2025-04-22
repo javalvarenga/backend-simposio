@@ -150,3 +150,16 @@ export const updatePaymentStatus = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error al actualizar estado de pago' });
   }
 };
+
+export const updateKitStatus = async (req: Request, res: Response) => {
+  try {
+    const idParticipante = parseInt(req.params.id, 10);
+    const status = req.body.kit;
+    const result = await ParticipantModel.updateKitStatus(idParticipante, status);
+    
+    res.json({ message: 'Estado del kit actualizado exitosamente', result });
+  } catch (error) {
+    console.error('Error al actualizar estado del kit:', error);
+    res.status(500).json({ message: 'Error al actualizar estado del kit' });
+  }
+};
