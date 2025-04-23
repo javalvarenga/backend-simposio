@@ -4,7 +4,7 @@ import { db } from "../config/db";
 
 export async function callProcedure<T = any>(
   procedureName: string,
-  params: (string | number | boolean | null)[] = []
+  params: (string | number | boolean | Buffer | null)[] = []
 ): Promise<T[]> {
   const placeholders = params.map(() => "?").join(", ");
   const sql = `CALL ${procedureName}(${placeholders})`;

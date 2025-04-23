@@ -42,7 +42,7 @@ export const createParticipant = async (
     codigoQR,
     certificadoEnviado,
     tipoPago,
-    boleta,
+    boleta && boleta.includes(",") ? boleta.split(",")[1] : null,
     estadoPago
   ]);
 
