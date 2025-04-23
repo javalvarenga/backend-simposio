@@ -1,4 +1,4 @@
-import { callProcedure } from "../../utils/callProcedure";
+import { callProcedure } from "../../utils/callProcedure.js";
 
 export const getParticipants = async () => {
   return await callProcedure("getParticipantPayment", []);

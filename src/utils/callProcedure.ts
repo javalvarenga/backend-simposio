@@ -1,6 +1,6 @@
 // src/dbUtils.ts
 
-import { db } from "../config/db";
+import { db } from "../config/db.js";
 
 export async function callProcedure<T = any>(
   procedureName: string,

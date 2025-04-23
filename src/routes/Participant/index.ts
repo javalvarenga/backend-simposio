@@ -1,5 +1,5 @@
 import express from "express";
-import * as ParticipantController from "../../controllers/Participant";
+import * as ParticipantController from "../../controllers/Participant/index.js";
 
 console.log("ParticipantRoutes");
 
