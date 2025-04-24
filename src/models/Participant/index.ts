@@ -1,4 +1,4 @@
-import { callProcedure } from "../../utils/callProcedure";
+import { callProcedure } from "../../utils/callProcedure.js";
 
 export const getParticipants = async () => {
   return await callProcedure("getParticipantPayment", []);
@@ -42,7 +42,7 @@ export const createParticipant = async (
     codigoQR,
     certificadoEnviado,
     tipoPago,
-    boleta,
+    boleta && boleta.includes(",") ? boleta.split(",")[1] : null,
     estadoPago
   ]);
 

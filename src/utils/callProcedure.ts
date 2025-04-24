@@ -1,10 +1,10 @@
 // src/dbUtils.ts
 
-import { db } from "../config/db";
+import { db } from "../config/db.js";
 
 export async function callProcedure<T = any>(
   procedureName: string,
-  params: (string | number | boolean | null)[] = []
+  params: (string | number | boolean | Buffer | null)[] = []
 ): Promise<T[]> {
   const placeholders = params.map(() => "?").join(", ");
   const sql = `CALL ${procedureName}(${placeholders})`;
