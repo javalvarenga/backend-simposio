@@ -4,6 +4,6 @@ import * as AdministratorController from '../../controllers/Administrator';
 const router = express.Router();
 
 router.get('/', AdministratorController.getAllAdministrators);
-router.post('/', AdministratorController.login);
+router.post("/login", AdministratorController.login);
 
 export default router;
