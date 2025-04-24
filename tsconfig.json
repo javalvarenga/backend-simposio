@@ -1,22 +1,24 @@
 {
   "compilerOptions": {
-    "module": "ESNext", // Usa el sistema de módulos ECMAScript
-    "moduleResolution": "node", // Resolución de módulos al estilo de Node.js
-    "target": "ESNext", // Compilación hacia ESNext para mantener soporte a las últimas características
-    "outDir": "./dist", // Directorio donde se guardarán los archivos compilados
-    "esModuleInterop": true, // Permite la interoperabilidad con módulos CommonJS
-    "skipLibCheck": true, // Opción para evitar chequeos de tipo en las dependencias
-    "allowJs": true, // Permite incluir archivos .js en el proyecto
-    "strict": true, // Habilita el modo estricto para obtener una mejor validación de tipos
-    "resolveJsonModule": true, // Permite importar archivos .json
-    "jsx": "react", // Si estás trabajando con React, también puedes poner esto como "react"
-    "declaration": true, // Opcional: si quieres generar los archivos de declaración .d.ts
-    "sourceMap": true // Opcional: genera mapas de origen para depuración
+    "lib": ["ES2020"],
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "noEmit": false,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

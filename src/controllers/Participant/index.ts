@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as ParticipantModel from '../../models/Participant/index';
+import * as ParticipantModel from '../../models/Participant/index.js';
 export const createParticipant = async (req: Request, res: Response) => {
   try {
     const {
