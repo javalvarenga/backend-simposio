@@ -163,3 +163,16 @@ export const updateKitStatus = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error al actualizar estado del kit' });
   }
 };
+
+export const updateCertStatus = async (req: Request, res: Response) => {
+  try {
+    const idParticipante = parseInt(req.params.id, 10);
+    const status = req.body.certificadoEnviado;
+    const result = await ParticipantModel.updateCertStatus(idParticipante, status);
+    
+    res.json({ message: 'Estado del certificado actualizado exitosamente', result });
+  } catch (error) {
+    console.error('Error al actualizar estado del certificado:', error);
+    res.status(500).json({ message: 'Error al actualizar estado del certificado' });
+  }
+};
