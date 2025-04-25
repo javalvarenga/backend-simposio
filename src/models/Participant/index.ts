@@ -99,3 +99,16 @@ export const updatePaymentStatus = async (idParticipante: number, status: string
 export const updateKitStatus = async (idParticipante: number, status: number) => {
   return await callProcedure("updateKitStatus", [idParticipante, status]);
 };
+
+export const updateCertStatus = async (idParticipante: number, status: number) => {
+  return await callProcedure("updateCertStatus", [idParticipante, status]);
+};
+
+export const getAsistencia = async () => {
+  const [result]: any = await callProcedure("getAsistencia")
+  return result
+}
+
+export const updateQRCode = async (idParticipante: number, codigoQR: string) => {
+  return await callProcedure("updateQRCode", [idParticipante, codigoQR]);
+};
