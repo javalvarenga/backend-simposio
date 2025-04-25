@@ -4,7 +4,6 @@
   "description": "Backend for Simposio application",
   "main": "dist/index.js",
   "type": "module",
- 
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",

@@ -4,7 +4,7 @@ import path from "path"
 import fs from "fs"
 
 // Determinar la ruta absoluta al archivo .env en la raíz del proyecto
-const envPath = path.resolve(process.cwd(), ".env")
+const envPath = path.resolve(process.cwd(), "db_c.env")
 
 // Verificar si el archivo existe
 if (fs.existsSync(envPath)) {
