@@ -1,4 +1,11 @@
 import { Request, Response } from 'express';
+
+import { generarCertificado } from "../../utils/pdfGenerator.js"
+//import { enviarCertificado } from "../../utils/mailer.js"
+import { generarCodigoQR } from "../../utils/qrGenerator.js";
+import { enviarQR } from "../../utils/mailer.js";
+
+
 import * as ParticipantModel from '../../models/Participant/index.js';
 export const createParticipant = async (req: Request, res: Response) => {
   try {
@@ -144,6 +151,16 @@ export const updatePaymentStatus = async (req: Request, res: Response) => {
     const status = req.body.estadoPago;
     const result = await ParticipantModel.updatePaymentStatus(idParticipante, status);
     
+    if (status === 'C') {
+      const participante = await ParticipantModel.getParticipantById(idParticipante);
+      console.log(participante);
+      const qrData = participante.codigoQR;
+      const qrImage = await generarCodigoQR(qrData);
+      console.log(qrImage);
+      await enviarQR(participante.correoElectronico, participante.nombre, qrImage);
+      
+    }
+
     res.json({ message: 'Estado de pago actualizado exitosamente', result });
   } catch (error) {
     console.error('Error al actualizar estado de pago:', error);
@@ -176,3 +193,20 @@ export const updateCertStatus = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error al actualizar estado del certificado' });
   }
 };
+
+
+/*export const enviarCertificados = async (_req: Request, res: Response) => {
+  try {
+    const participantes = await ParticipantModel.getAsistencia()
+
+    for (const participante of participantes) {
+      const certificado = generarCertificado(participante.nombre)
+      await enviarCertificado(participante.correoElectronico, certificado, participante.nombre)
+    }
+
+    res.status(200).json({ message: "Certificados enviados con éxito" })
+  } catch (error) {
+    console.error("Error al enviar certificados:", error)
+    res.status(500).json({ message: "Error al enviar certificados" })
+  }
+}*/
