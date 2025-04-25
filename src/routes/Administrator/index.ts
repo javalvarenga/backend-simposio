@@ -3,7 +3,7 @@ import * as AdministratorController from '../../controllers/Administrator/index.
 
 const router = express.Router();
 
-router.get('/', AdministratorController.getAllAdministrators);
-
+router.get("/", AdministratorController.getAllAdministrators);
+router.post("/", AdministratorController.login);
 
 export default router;

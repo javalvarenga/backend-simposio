@@ -61,12 +61,7 @@ export const updateParticipant = async (
   talla: 'XL' | 'L' | 'M' | 'S',
   fechaNacimiento: string,
   institucion: string | null,
-  Rol: string,
-  codigoQR: string,
-  certificadoEnviado: boolean,
-  tipoPago: 'E' | 'D',
-  boleta: string,
-  estadoPago: 'C' | 'P' | 'R' | 'V'
+  Rol: string
 ) => {
   return await callProcedure("updateParticipantPayment", [
     idParticipante,
@@ -80,17 +75,11 @@ export const updateParticipant = async (
     talla,
     fechaNacimiento,
     institucion,
-    Rol,
-    codigoQR,
-    certificadoEnviado ? 1 : 0,
-    tipoPago,
-    boleta,
-    estadoPago
+    Rol
   ]);
 };
-
 export const deleteParticipant = async (idParticipante: number) => {
-  return await callProcedure("deleteParticipant", [idParticipante]);
+  return await callProcedure("deleteParticipantPayment", [idParticipante]);
 };
 
 export const updatePaymentStatus = async (idParticipante: number, status: string) => {

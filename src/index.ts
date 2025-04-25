@@ -19,7 +19,7 @@ const apiVersion = '/api/v1';
 
 // Routes
 app.use(`${apiVersion}/participants`, ParticipantRoutes);
-app.use(`${apiVersion}/admnistrators`, AdministratorRoutes);
+app.use(`${apiVersion}/administrators`, AdministratorRoutes);
 
 app.get('/',async (req, res) => {
   res.json({ message: 'Backend Simposio API running successfully!' });

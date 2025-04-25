@@ -85,11 +85,6 @@ export const updateParticipant = async (req: Request, res: Response) => {
       fechaNacimiento,
       institucion,
       Rol,
-      codigoQR,
-      certificadoEnviado,
-      tipoPago,
-      boleta, 
-      estadoPago
     );
     
     res.json({ message: 'Participante actualizado exitosamente', result });
