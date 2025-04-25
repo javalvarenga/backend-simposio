@@ -49,6 +49,16 @@ export const createParticipant = async (
   return result;
 };
 
+export const verificarQR = async (
+  codigoQR: string
+) => {
+  const result = await callProcedure("RegistrarAsistenciaEvento", [
+    codigoQR
+  ]);
+
+  return result;
+};
+
 export const updateParticipant = async (
   idParticipante: number,
   tipoParticipante: 'E' | 'C' | 'I',

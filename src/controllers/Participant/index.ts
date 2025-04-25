@@ -50,6 +50,26 @@ export const createParticipant = async (req: Request, res: Response) => {
   }
 };
 
+export const verificarQR = async (req: Request, res: Response) => {
+  try {
+    const {
+      codigoQR
+    } = req.body;
+
+    const result = await ParticipantModel.verificarQR(
+      codigoQR
+    );
+    
+    res.status(201).json({ 
+      message: 'Verificacion completa', 
+      result: result 
+    });
+  } catch (error) {
+    console.error('Error al verificar QR:', error);
+    res.status(500).json({ message: 'Error al instentar verificar' });
+  }
+};
+
 export const updateParticipant = async (req: Request, res: Response) => {
   try {
     const idParticipante = parseInt(req.params.id, 10);
