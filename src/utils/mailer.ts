@@ -15,10 +15,11 @@ const transporter = nodemailer.createTransport({
 export const enviarQR = async (email: string, nombre: string, qrImage: string) => {
   try {
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: 'simposioumg25@gmail.com',
       to: email,
-      subject: 'Tu código QR para el evento',
+      subject: 'QR de acceso al Simposio de Tecnología INNOVA-UMG 2025',
       html: `
+        <h1>Bienvenido al Simposio de Tecnología INNOVA-UMG 2025</h1>
         <h1>¡Gracias por completar tu pago, ${nombre}!</h1>
         <p>Adjunto encontrarás tu código QR:</p>
         
@@ -30,7 +31,9 @@ export const enviarQR = async (email: string, nombre: string, qrImage: string) =
       }]
     };
 
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Mensaje enviado:', info);
+  
   } catch (error) {
     console.error('Error al enviar correo:', error);
   }
