@@ -20,7 +20,7 @@ export const enviarQR = async (email: string, nombre: string, qrImage: string) =
       subject: 'QR de acceso al Simposio de Tecnología INNOVA-UMG 2025',
       html: `
         <h1>Bienvenido al Simposio de Tecnología INNOVA-UMG 2025</h1>
-        <h1>¡Gracias por completar tu pago, ${nombre}!</h1>
+        <h2>¡Gracias por completar tu pago, ${nombre}!</h2>
         <p>Adjunto encontrarás tu código QR:</p>
         
       `,
